@@ -45,7 +45,7 @@ var interval = setInterval(async function () {
     
         const binance = new ccxt.binance ();  
         const marketsArrayPrice = await binance.publicGetTickerPrice ();
-        let btcPrice = await marketsArrayPrice[11].price;
+        let btcPrice = marketsArrayPrice[11].price;
         binance_price_check(btcPrice);
 }, 5000);
 
