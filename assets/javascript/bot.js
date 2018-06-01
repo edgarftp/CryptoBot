@@ -2,7 +2,7 @@ $(document).ready(function(){
     var percentage = .01;
     var refPrice = null;
     var refDifference = null;
-    var arrayObj = [{price: 0, dif: 0},{price: 0, dif: 0},{price: 0, dif: 0},{price: 0, dif: 0},{price: 0, dif: 0},{price: 0, dif: 0}];
+    var arrayObj = [];
     var index = 0;
     var difAmount = null;
     
@@ -13,27 +13,35 @@ $(document).ready(function(){
             if (refPrice == null){
                 refPrice = btcPrice;
                 refDifference = parseFloat (btcPrice * percentage);
-                arrayObj[index].price = btcPrice;
-                arrayObj[index].dif = 0;
+                arrayObj[index] = {
+                    "price": btcPrice,
+                    "dif": 0
+                };
                 index++;
                 console.log(arrayObj);
             } else {
                 refPrice = btcPrice;
                 refDifference = parseFloat (btcPrice * percentage);
-                arrayObj[index].price = btcPrice;
-                arrayObj[index].dif = parseFloat (btcPrice - (arrayObj[5].price));
+                arrayObj[index] = {
+                    "price": btcPrice,
+                    "dif": parseFloat (btcPrice - (arrayObj[11].price))
+                };
                 index++;
                 console.log(arrayObj);
             }   
-        } else if(index>0 && index<5){
+        } else if(index>0 && index<10){
             console.log(btcPrice);
-            arrayObj[index].price = btcPrice;
-            arrayObj[index].dif = parseFloat (btcPrice - (arrayObj[index-1].price));
+            arrayObj[index] = {
+                "price": btcPrice,
+                "dif": parseFloat (btcPrice - (arrayObj[index-1].price))
+            };
             index++;
             console.log(arrayObj);
         } else {
-            arrayObj[index].price = btcPrice;
-            arrayObj[index].dif = parseFloat (btcPrice - (arrayObj[index-1].price));
+            arrayObj[index] = {
+                "price": btcPrice,
+                "dif": parseFloat (btcPrice - (arrayObj[index-1].price))
+            };
             index=0;
             console.log(arrayObj);
         }
