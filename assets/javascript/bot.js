@@ -29,7 +29,7 @@ $(document).ready(function(){
                 index++;
                 console.log(arrayObj);
             }   
-        } else if(index>0 && index<10){
+        } else if(index>0 && index<11){
             console.log(btcPrice);
             arrayObj[index] = {
                 "price": btcPrice,
