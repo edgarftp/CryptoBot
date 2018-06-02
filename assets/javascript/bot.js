@@ -5,6 +5,7 @@ $(document).ready(function(){
     var arrayObj = [];
     var index = 0;
     var difAmount = null;
+    var interval = null;
 
     var check_for_buy = function () {
         arrayObj.forEach(element => {
@@ -13,7 +14,7 @@ $(document).ready(function(){
         if (difAmount>refDifference){
             buy_function();
             console.log('we buyin');
-            clearInterval(Interval);
+            clearInterval(interval);
 
         }else {
             console.log("nothing to buy");
@@ -66,7 +67,7 @@ $(document).ready(function(){
     };
 
 $("#startButton").on("click", function () {
-    var interval = setInterval(async function () {
+    interval = setInterval(async function () {
     
         const binance = new ccxt.binance ();  
         const marketsArrayPrice = await binance.publicGetTickerPrice ();
@@ -99,7 +100,7 @@ var buy_function = function() {
             var i = 0;
             if (result.asks.length > 0){
                 do {
-                    price = parseFloat(result.asks[i].price);
+                    price = parseFloat(result.asks[i].price * 1.01);
                     amount = parseFloat(result.asks[i].amount);
                     cost += parseFloat(price * amount);
                     if (cost>cash){
