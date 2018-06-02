@@ -5,6 +5,22 @@ $(document).ready(function(){
     var arrayObj = [];
     var index = 0;
     var difAmount = null;
+    var interval = null;
+
+    var check_for_buy = function () {
+        arrayObj.forEach(element => {
+            difAmount += element.dif;
+        });
+        if (difAmount>refDifference){
+            buy_function();
+            console.log('we buyin');
+            clearInterval(interval);
+
+        }else {
+            console.log("nothing to buy");
+        }
+        
+    };
     
 
     var binance_price_check = function (btcPrice){
@@ -46,21 +62,28 @@ $(document).ready(function(){
             console.log(arrayObj);
         }
 
-        //check_for_buy();
+        check_for_buy();
 
-    }
-var interval = setInterval(async function () {
+    };
+
+$("#startButton").on("click", function () {
+    interval = setInterval(async function () {
     
         const binance = new ccxt.binance ();  
         const marketsArrayPrice = await binance.publicGetTickerPrice ();
-        let btcPrice = marketsArrayPrice[11].price;
-        binance_price_check(btcPrice);
+        if (marketsArrayPrice){
+            let btcPrice = marketsArrayPrice[11].price;
+            binance_price_check(btcPrice); 
+        }else {
+            conosole.log(error);
+        }
 }, 5000);
 
-    $("#startButton").on("click", function() {
-       
-       
+})
 
+
+       
+var buy_function = function() {
         var queryURL = "https://api.bitso.com/v3/order_book/?book=btc_mxn"
 
         $.ajax ({
@@ -77,7 +100,7 @@ var interval = setInterval(async function () {
             var i = 0;
             if (result.asks.length > 0){
                 do {
-                    price = parseFloat(result.asks[i].price);
+                    price = parseFloat(result.asks[i].price * 1.01);
                     amount = parseFloat(result.asks[i].amount);
                     cost += parseFloat(price * amount);
                     if (cost>cash){
@@ -101,7 +124,7 @@ var interval = setInterval(async function () {
             }
           
         })
-    });
+    };
 
 
 })
