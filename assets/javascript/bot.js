@@ -8,6 +8,7 @@ $(document).ready(function(){
     var interval = null;
 
     var check_for_buy = function () {
+        difAmount = 0;
         arrayObj.forEach(element => {
             difAmount += element.dif;
         });
@@ -35,6 +36,8 @@ $(document).ready(function(){
                 };
                 index++;
                 console.log(arrayObj);
+                console.log("ref Difference = " + refDifference);
+                console.log("dif Amount = " + difAmount);
             } else {
                 refPrice = btcPrice;
                 refDifference = parseFloat (btcPrice * percentage);
@@ -44,6 +47,8 @@ $(document).ready(function(){
                 };
                 index++;
                 console.log(arrayObj);
+                console.log("ref Difference = " + refDifference);
+                console.log("dif Amount = " + difAmount);
             }   
         } else if(index>0 && index<11){
             console.log(btcPrice);
@@ -53,6 +58,8 @@ $(document).ready(function(){
             };
             index++;
             console.log(arrayObj);
+            console.log("ref Difference = " + refDifference);
+            console.log("dif Amount = " + difAmount);
         } else {
             arrayObj[index] = {
                 "price": btcPrice,
@@ -60,6 +67,8 @@ $(document).ready(function(){
             };
             index=0;
             console.log(arrayObj);
+            console.log("ref Difference = " + refDifference);
+            console.log("dif Amount = " + difAmount);
         }
 
         check_for_buy();
@@ -74,8 +83,6 @@ $("#startButton").on("click", function () {
         if (marketsArrayPrice){
             let btcPrice = marketsArrayPrice[11].price;
             binance_price_check(btcPrice); 
-        }else {
-            conosole.log(error);
         }
 }, 5000);
 
