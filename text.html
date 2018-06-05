@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sample FirebaseUI App</title>
+  <!-- Firebase App is always required and must be first -->
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+
+<!-- Add additional services you want to use -->
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/5.0.4kk/firebase-firestore.js"></script> -->
+<!-- <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-messaging.js"></script> -->
+<!-- <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-functions.js"></script> -->
+
+<!-- Comment out (or don't include) services you don't want to use -->
+<!-- <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-storage.js"></script> -->
+
+<script>
+  var config = {
+    // ...
+  };
+  firebase.initializeApp(config);
+</script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyDUE4pr67a80pw_BEgh8HlAY3GqI2MUHdU",
+            authDomain: "database-cryptobot.firebaseapp.com",
+            databaseURL: "https://database-cryptobot.firebaseio.com",
+            projectId: "database-cryptobot",
+            storageBucket: "database-cryptobot.appspot.com",
+            messagingSenderId: "540801591647"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script type="text/javascript">
+        // FirebaseUI config.
+        var uiConfig = {
+            signInSuccessUrl: 'cryptobot.html',
+            signInOptions: [
+                // Leave the lines as is for the providers you want to offer your users.
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                firebase.auth.GithubAuthProvider.PROVIDER_ID,
+                firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                firebase.auth.PhoneAuthProvider.PROVIDER_ID
+            ],
+            // Terms of service url.
+            tosUrl: '<your-tos-url>'
+        };
+
+        // Initialize the FirebaseUI Widget using Firebase.
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        // The start method will wait until the DOM is loaded.
+        ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+
+
+
+ 
+</head>
+
+<body>
+    <h1>Welcome to My Awesome App</h1>
+    <div id="sign-in-status"></div>
+    <div id="sign-in"></div>
+    <div id="account-details"></div>
+
+
+    <script type="text/javascript">
+        initApp = function () {
+            firebase.auth().onAuthStateChanged(function (user) {
+                if (user) {
+                    // User is signed in.
+                    var displayName = user.displayName;
+                    var email = user.email;
+                    var emailVerified = user.emailVerified;
+                    var photoURL = user.photoURL;
+                    var uid = user.uid;
+                    var phoneNumber = user.phoneNumber;
+                    var providerData = user.providerData;
+                    user.getIdToken().then(function (accessToken) {
+                        document.getElementById('sign-in-status').textContent = 'Signed in';
+                        document.getElementById('sign-in').textContent = 'Sign out';
+                        document.getElementById('account-details').textContent = JSON.stringify({
+                            displayName: displayName,
+                            email: email,
+                            emailVerified: emailVerified,
+                            phoneNumber: phoneNumber,
+                            photoURL: photoURL,
+                            uid: uid,
+                            accessToken: accessToken,
+                            providerData: providerData
+                        }, null, '  ');
+                    });
+                } else {
+                    // User is signed out.
+                    document.getElementById('sign-in-status').textContent = 'Signed out';
+                    document.getElementById('sign-in').textContent = 'Sign in';
+                    document.getElementById('account-details').textContent = 'null';
+                }
+            }, function (error) {
+                console.log(error);
+            });
+        };
+
+        window.addEventListener('load', function () {
+            initApp()
+        });
+    </script>
+</body>
+
+</html>
