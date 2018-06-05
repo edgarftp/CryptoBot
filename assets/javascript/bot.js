@@ -6,6 +6,9 @@ $(document).ready(function(){
     var index = 0;
     var difAmount = null;
     var interval = null;
+    var bitsoInterval = null;
+    var order = 0;
+    
 
     var check_for_buy = function () {
         difAmount = 0;
@@ -16,9 +19,6 @@ $(document).ready(function(){
             buy_function();
             console.log('we buyin');
             clearInterval(interval);
-
-        }else {
-            console.log("nothing to buy");
         }
         
     };
@@ -86,7 +86,24 @@ $("#startButton").on("click", function () {
         }
 }, 5000);
 
-})
+});
+var bitso_price_check = function () {
+
+};
+
+var buy_status = function (price, quantity, date) {
+    order++;
+    var divRow = $("<div>").addClass("row");
+    var divColumns = $("<div>").addClass("col-md-12");
+    var pOrder = $("<p>").text("Buy order #" + order).addClass(col-md-1);
+    var pDate = $("<p>").text(date).addClass(col-md-1);
+    var pBuyPrice = $("<p>").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass(col-md-1);
+    var pQuantity = $("<p>").text(quantity).addClass(col-md-1);
+    var pCoin = $("<p>").text("BTC").addClass(col-md-1);
+    var pEquivalent = $("<p>").text("$" + parseFloat(parseFloat(price)*parseFloat(quantity)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass(col-md-1);
+
+    bitsoInterval = setInterval(bitso_price_check, 5000);
+};
 
 
        
@@ -105,6 +122,7 @@ var buy_function = function() {
             var buyPrice = null;
             var cost = 0;
             var i = 0;
+            var date = null;
             if (result.asks.length > 0){
                 do {
                     price = parseFloat(result.asks[i].price * 1.01);
@@ -115,6 +133,7 @@ var buy_function = function() {
                         buyPrice = (sumPrice)/(i+1);
                         quantity = parseFloat(cash/buyPrice);
                         cash = 0;
+                        date = moment().format('MMMM Do YYYY, h:mm:ss a');
                         console.log(i+1);
                         console.log("Compraste: " + quantity + " BTC");
                         console.log("A precio de: " + buyPrice + " BTC");
@@ -129,6 +148,7 @@ var buy_function = function() {
                 while(cash>0 || i > 9);
                 
             }
+            buy_status(buyPrice, quantity, date);
           
         })
     };
