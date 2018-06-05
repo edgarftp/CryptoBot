@@ -29,7 +29,7 @@ $(document).ready(function(){
         if (index == 0) {
             if (refPrice == null){
                 refPrice = btcPrice;
-                refDifference = parseFloat (btcPrice * percentage);
+                refDifference = parseFloat (btcPrice * -.00000001);
                 arrayObj[index] = {
                     "price": btcPrice,
                     "dif": 0
@@ -76,6 +76,7 @@ $(document).ready(function(){
     };
 
 $("#startButton").on("click", function () {
+
     interval = setInterval(async function () {
     
         const binance = new ccxt.binance ();  
@@ -87,22 +88,36 @@ $("#startButton").on("click", function () {
 }, 5000);
 
 });
-var bitso_price_check = function () {
-
-};
 
 var buy_status = function (price, quantity, date) {
     order++;
-    var divRow = $("<div>").addClass("row");
+    var divRow = $("<div>").addClass("row").attr("id", "divRow" + order);
     var divColumns = $("<div>").addClass("col-md-12");
-    var pOrder = $("<p>").text("Buy order #" + order).addClass(col-md-1);
-    var pDate = $("<p>").text(date).addClass(col-md-1);
-    var pBuyPrice = $("<p>").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass(col-md-1);
-    var pQuantity = $("<p>").text(quantity).addClass(col-md-1);
-    var pCoin = $("<p>").text("BTC").addClass(col-md-1);
-    var pEquivalent = $("<p>").text("$" + parseFloat(parseFloat(price)*parseFloat(quantity)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass(col-md-1);
+    var pOrder = $("<p>").text("Buy order #" + order).addClass("col-md-1");
+    var pDate = $("<p>").text(date).addClass("col-md-2");
+    var pBuyPrice = $("<p>").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass("col-md-1");
+    var pQuantity = $("<p>").text(parseFloat(quantity).toFixed(8)).addClass("col-md-1");
+    var pCoin = $("<p>").text("BTC").addClass("col-md-1");
+    var pEquivalent = $("<p>").text("$" + parseFloat(parseFloat(price)*parseFloat(quantity)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass("col-md-1");
+    var pActualPrice = $("<p>").addClass("col-md-1").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).attr("id", "actual-price-" + order);
+    var pWinLoss = $("<p>").text("N/A").addClass("col-md-1").attr("id", "win-loss-" + order);
+    divColumns.append(pOrder, pDate, pBuyPrice, pQuantity, pCoin, pEquivalent, pActualPrice, pWinLoss);
+    divRow.append(divColumns);
+    $("#divHolder").prepend(divRow);
 
-    bitsoInterval = setInterval(bitso_price_check, 5000);
+    bitsoInterval = setInterval(function (){
+        var queryURL = "https://api.bitso.com/v3/ticker/?book=btc_mxn"
+
+        $.ajax ({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response) {
+            var actualPrice = parseFloat(response.payload.last);
+            console.log(actualPrice);
+            $("#actual-price-" + order).text(actualPrice);
+            $("#win-loss-" + order).text(parseFloat(((actualPrice - price)/price)*100).toFixed(2) +"%");
+        });
+   },5000)
 };
 
 
@@ -121,17 +136,19 @@ var buy_function = function() {
             var sumPrice = null;
             var buyPrice = null;
             var cost = 0;
+            var bQuant = 0;
             var i = 0;
             var date = null;
             if (result.asks.length > 0){
                 do {
-                    price = parseFloat(result.asks[i].price * 1.01);
+                    price = parseFloat(result.asks[i].price);
                     amount = parseFloat(result.asks[i].amount);
-                    cost += parseFloat(price * amount);
+                    cost += parseFloat(price * amount * 1.01);
+                    console.log(cost);
                     if (cost>cash){
                         sumPrice += price;
                         buyPrice = (sumPrice)/(i+1);
-                        quantity = parseFloat(cash/buyPrice);
+                        quantity += (bQuant + (cash/(price * 1.01)));
                         cash = 0;
                         date = moment().format('MMMM Do YYYY, h:mm:ss a');
                         console.log(i+1);
@@ -139,13 +156,13 @@ var buy_function = function() {
                         console.log("A precio de: " + buyPrice + " BTC");
                     } else {
                         sumPrice += price;
-                        cash -= cost;
                         buyPrice = (sumPrice)/(i+1);
-                        quantity = parseFloat(cash/buyPrice);
+                        bQuant += parseFloat(amount);
+                        cash -= cost;
                         i++;
                     }
                 }
-                while(cash>0 || i > 9);
+                while(cash>0 || i > 40);
                 
             }
             buy_status(buyPrice, quantity, date);
