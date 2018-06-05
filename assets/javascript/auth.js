@@ -3,15 +3,7 @@
 
     // firebase config
     // Initialize Firebase
-    var config = {
-        apiKey: "AIzaSyDUE4pr67a80pw_BEgh8HlAY3GqI2MUHdU",
-        authDomain: "database-cryptobot.firebaseapp.com",
-        databaseURL: "https://database-cryptobot.firebaseio.com",
-        projectId: "database-cryptobot",
-        storageBucket: "database-cryptobot.appspot.com",
-        messagingSenderId: "540801591647"
-    };
-    firebase.initializeApp(config);
+
 
     /////////////////////////////////////
 
