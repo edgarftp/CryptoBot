@@ -18,40 +18,75 @@
 
 
   <style>
-  
-  body {
-    background: url("./assets/images/cryptobackground.jpg" ) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-}
-  
-  
+    body {
+      background: url("./assets/images/cryptobackground.jpg") no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+
+    img {
+      padding: 0;
+      width: 100%;
+    }
+
+    #startButton {
+      margin-top: 2%;
+    }
+
+    #loginButton{
+
+      margin-top: 2%;
+
+    }
+
+
+    
   </style>
 
 </head>
 
-<body>
-    
-  <div class="container">
+<body class="container">
+
+ 
 
     <!--<img src="/Users/txivojuarezlap/Desktop/bootcamp/HWS/CryptoBot/assets/images/cryptobot.jpg" alt="logo" class=".col-lg-12">-->
     <div class="col-12">
-      <img src="./assets/images/cryptobot.jpg" alt="logo" class = "col-12 mx-auto">
-      <p class = ></p>
-      <m class = ></p>
-   
+      <img src="./assets/images/cryptobot.jpg" alt="logo">
+
 
       <!-- Start Button -->
-      <button id="startButton" class="btn btn-primary btn-lg btn-block .mt-50">Start</button>
+      <button id="startButton" class="btn btn-primary btn-lg btn-block">Start</button>
     </div>
 
-    <br>
+
+    <!-- Login Button -->
+    
+        <div class="col-12">
+          
+      <a href="auth/index.html">
+        <button id="loginButton" class="btn btn-primary btn-lg btn-block">Login</button>
+      </a>
+      <br>
+
+
     <!-- inputs row -->
-    <div class="col-lg-12">
+    
 
+      <div class="card">
 
+        <!-- Panel Heading for the retrieved articles box -->
+        <div class="card-header">
+          <strong>
+            <i class="fa fa-table"></i> Processos de inputs</strong>
+        </div>
+
+        <!-- This main panel will hold each of the resulting articles -->
+        <div class="card-body" id="article-section">
+        </div>
+
+      </div>
 
       <!-- This row will handle all of the retrieved articles -->
       <!-- <div class="row">
@@ -64,14 +99,11 @@
                 <input type="text" name="input2" placeholder="Input 2">
                 <input type="text" name="input3" placeholder="Input 3">
                 <input type="text" name="input4" placeholder="Input 4">
-
-
                 <div class="dropdown">
                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Dropdown link
                     </a>
                   
-
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                       <a class="dropdown-item" href="#">Action</a>
                       <a class="dropdown-item" href="#">Another action</a>
@@ -92,159 +124,159 @@
 
 
       <!-- This panel will initially be made up of a panel and wells for each of the articles retrieved -->
-      <div class="card">
 
-          <!-- Panel Heading for the retrieved articles box -->
-          <div class="card-header">
-            <strong>
-              <i class="fa fa-table"></i> Processos de inputs</strong>
-          </div>
+    </div>
 
-        <!-- This main panel will hold each of the resulting articles -->
-            <div class="card-body" id="article-section">
+
+
+
+    <!-- Primer Api (bitso)-->
+    <div class="col-12">
+
+
+      <!-- This row will handle all of the retrieved articles -->
+      <div class="row">
+        <div class="col-sm-12">
+          <br>
+
+          <!-- This panel will initially be made up of a panel and wells for each of the articles retrieved -->
+          <div class="card">
+
+            <!-- Panel Heading for the retrieved articles box -->
+            <div class="card-header">
+              <strong>
+                <i class="fa fa-table"></i> Top Articles Bitso API</strong>
             </div>
-      
-  </div>
 
-  </div>
+            <!-- This main panel will hold each of the resulting articles -->
+            <div class="card-body" id="article-section">
 
+              <div class="row">
+                <!-- left image of bitso  -->
+                <img src="./assets/images/bitso1.jpeg" alt="bitso1" class="col-6 align-self-start">
 
-
-
-  <!-- Primer Api (bitso)-->
-  <div class="col-lg-12">
-      
-
-    <!-- This row will handle all of the retrieved articles -->
-    <div class="row">
-      <div class="col-sm-12">
-        <br>
-
-        <!-- This panel will initially be made up of a panel and wells for each of the articles retrieved -->
-        <div class="card">
-
-          <!-- Panel Heading for the retrieved articles box -->
-          <div class="card-header">
-            <strong>
-              <i class="fa fa-table"></i> Top Articles Bitso API</strong>
-          </div>
-
-          <!-- This main panel will hold each of the resulting articles -->
-          <div class="card-body" id="article-section">
-  
-                  <div class="row">
-                     <!-- left image of bitso  -->
-              <img src="./assets/images/bitso1.jpeg" alt="bitso1" class = "col-6 align-self-start">
-
-                    <!-- Placeholder for bitso API -->
-              <img src="./assets/images/bitso pl.jpg" alt="bitso1" class = "col-6  align-self-end">
-                    </div>
-                    
+                <!-- Placeholder for bitso API -->
+                <img src="./assets/images/bitso pl.jpg" alt="bitso1" class="col-6  align-self-end">
+              </div>
 
 
+
+            </div>
           </div>
         </div>
       </div>
+
     </div>
 
-  </div>
 
 
 
 
-
-  <!-- Segundo Api (crypto calander) -->
-  <div class="col-lg-12">
-
+    <!-- Segundo Api (crypto calander) -->
+    <div class="col-12">
 
 
-    <!-- This row will handle all of the retrieved articles -->
-    <div class="row">
-      <div class="col-sm-12">
-        <br>
 
-        <!-- This panel will initially be made up of a panel and wells for each of the articles retrieved -->
-        <div class="card">
+      <!-- This row will handle all of the retrieved articles -->
+      <div class="row">
+        <div class="col-sm-12">
+          <br>
 
-                  <!-- Panel Heading for the retrieved articles box -->
-                  <div class="card-header">
-                    <strong>
-                      <i class="fa fa-table"></i> Top Articles Crypto calander API</strong>
+          <!-- This panel will initially be made up of a panel and wells for each of the articles retrieved -->
+          <div class="card">
+
+            <!-- Panel Heading for the retrieved articles box -->
+            <div class="card-header">
+              <strong>
+                <i class="fa fa-table"></i> Top Articles Crypto calander API</strong>
+            </div>
+
+            <!-- This main panel will hold each of the resulting articles -->
+            <div class="card-body" id="article-section">
+
+
+              <div class="card-deck">
+
+                <div class="card">
+                  <img class="card-img-top" src=".../100px200/" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content
+                      is a little bit longer.</p>
+                    <p class="card-text">
+                      <small class="text-muted">Last updated 3 mins ago</small>
+                    </p>
                   </div>
+                </div>
 
-              <!-- This main panel will hold each of the resulting articles -->
-              <div class="card-body" id="article-section">
+                <div class="card">
+                  <img class="card-img-top" src=".../100px200/" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                    <p class="card-text">
+                      <small class="text-muted">Last updated 3 mins ago</small>
+                    </p>
+                  </div>
+                </div>
 
+                <div class="card">
+                  <img class="card-img-top" src=".../100px200/" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card
+                      has even longer content than the first to show that equal height action.</p>
+                    <p class="card-text">
+                      <small class="text-muted">Last updated 3 mins ago</small>
+                    </p>
+                  </div>
+                </div>
 
-                            <div class="card-deck">
+                <div class="card">
+                  <img class="card-img-top" src=".../100px200/" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card
+                      has even longer content than the first to show that equal height action.</p>
+                    <p class="card-text">
+                      <small class="text-muted">Last updated 3 mins ago</small>
+                    </p>
+                  </div>
+                </div>
 
-                                <div class="card">
-                                  <img class="card-img-top" src=".../100px200/" alt="Card image cap">
-                                  <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                  </div>
-                                </div>
+              </div>
 
-                                <div class="card">
-                                  <img class="card-img-top" src=".../100px200/" alt="Card image cap">
-                                  <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                  </div>
-                                </div>
-                                
-                                <div class="card">
-                                  <img class="card-img-top" src=".../100px200/" alt="Card image cap">
-                                  <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                  </div>
-                                </div>
-
-                                <div class="card">
-                                    <img class="card-img-top" src=".../100px200/" alt="Card image cap">
-                                    <div class="card-body">
-                                      <h5 class="card-title">Card title</h5>
-                                      <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                                      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                    </div>
-                                  </div>
-
-                              </div>
-
-        </div> <!-- closing card  -->
-      </div><!-- closing class -->
-    </div>  <!-- closing row -->
-   </div>   <!--closing Segundo Api (crypto calander) -->
-
-
-
-
-
-
-
-
-
-    <!-- Footer Region -->
-    <div class="row">
-      <div class="col-sm-12">
-
-        <!-- Line Break followed by closing -->
-        <hr>
-        <h5 class="text-center">
-          <small>Made with tears
-            
-          </small>
-        </h5>
-
+            </div>
+            <!-- closing card  -->
+          </div>
+          <!-- closing class -->
+        </div>
+        <!-- closing row -->
       </div>
-    </div>
+      <!--closing Segundo Api (crypto calander) -->
 
-  </div>
+
+
+
+
+
+
+
+
+      <!-- Footer Region -->
+      <div class="row">
+        <div class="col-sm-12">
+
+          <!-- Line Break followed by closing -->
+          <hr>
+          <h3 class="text-center">
+            Made with tears
+          </h3>
+
+        </div>
+      </div>
+
+    </div>
 
 
 
@@ -268,35 +300,22 @@
   <script src="assets/javascript/bot.js"></script>
 
   <!-- Code to the JavaScript File -->
-  <script src="NYTCode.js"></script>
+
 
   <!-- Script -->
   <script>
     //  START CODING BELOW!!
-
     // Initialize Firebase
-
-
     // Create a variable to reference the database
-
-
     // Capture Button Click
     $("#add-user").on("click", function (event) {
       // Don't refresh the page!
       event.preventDefault();
-
       // YOUR TASK!!!
-
       // Code in the logic for storing and retrieving the most recent user.
-
       // Don't forget to provide initial data to your Firebase database.
-
     });
-
-
     // Firebase watcher + initial loader HINT: .on("value")
-
-
     // Create Error Handling
   </script>
 
