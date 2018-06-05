@@ -14,6 +14,76 @@
     <!-- firebase linking script -->
 
     <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+
+    <script type="text/JavaScript">
+        var config = {
+       apiKey: "AIzaSyDUE4pr67a80pw_BEgh8HlAY3GqI2MUHdU",
+       authDomain: "database-cryptobot.firebaseapp.com",
+       databaseURL: "https://database-cryptobot.firebaseio.com",
+       projectId: "database-cryptobot",
+       storageBucket: "database-cryptobot.appspot.com",
+       messagingSenderId: "540801591647"
+     };
+     firebase.initializeApp(config);
+   
+     
+   
+       const txtEmail = document.getElementById('txtEmail');
+       const txtPassword = document.getElementById('txtPassword');
+       const btnLogin = document.getElementById('btnLogin');
+       const btnSignUp = document.getElementById('btnSignUp');
+       const btnLogOut = document.getElementById('btnLogOut');
+   
+       btnLogin.addEventListener('click', e => {
+   
+           const email = txtEmail.value;
+           const pass = txtPassword.value;
+           const auth = firebase.auth();
+   
+           const promise = auth.signInWithEmailAndPassword(email, pass);
+   
+           promise.catch(e => console.log(e.messege));
+   
+       });
+   
+   
+       btnSignUp.addEventListener('click', e =>{
+   
+   
+           const email = txtEmail.value;
+           const pass = txtPassword.value;
+           const auth = firebase.auth();
+   
+           const promise = auth.createUserWithEmailAndPassword(email, pass);
+   
+           promise.catch(e => console.log(e.messege));
+   
+   
+   
+       })
+   
+       btnLogOut.addEventListener('click', e => {
+   
+           firebase.auth().signOut();
+   
+       })
+   
+       firebase.auth().onAuthStateChanged(firebaseUser => {
+   
+           if (firebaseUser) {
+               console.log(firebaseUser);
+               btnLogOut.classList.remove('invisible');
+           } else {
+               console.log("not logged in");
+               btnLogOut.classList.add('invisible');
+           }
+   
+       });
+   
+   
+   
+       </script>
+
     <link rel="stylesheet" href="assets/css/style.css" type="text/css">
 
     <title>Cryptobot</title>
@@ -112,74 +182,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
         crossorigin="anonymous"></script>
 
-    <script type="text/JavaScript">
-     var config = {
-    apiKey: "AIzaSyDUE4pr67a80pw_BEgh8HlAY3GqI2MUHdU",
-    authDomain: "database-cryptobot.firebaseapp.com",
-    databaseURL: "https://database-cryptobot.firebaseio.com",
-    projectId: "database-cryptobot",
-    storageBucket: "database-cryptobot.appspot.com",
-    messagingSenderId: "540801591647"
-  };
-  firebase.initializeApp(config);
-
-  
-
-    const txtEmail = document.getElementById('txtEmail');
-    const txtPassword = document.getElementById('txtPassword');
-    const btnLogin = document.getElementById('btnLogin');
-    const btnSignUp = document.getElementById('btnSignUp');
-    const btnLogOut = document.getElementById('btnLogOut');
-
-    btnLogin.addEventListener('click', e => {
-
-        const email = txtEmail.value;
-        const pass = txtPassword.value;
-        const auth = firebase.auth();
-
-        const promise = auth.signInWithEmailAndPassword(email, pass);
-
-        promise.catch(e => console.log(e.messege));
-
-    });
-
-
-    btnSignUp.addEventListener('click', e =>{
-
-
-        const email = txtEmail.value;
-        const pass = txtPassword.value;
-        const auth = firebase.auth();
-
-        const promise = auth.createUserWithEmailAndPassword(email, pass);
-
-        promise.catch(e => console.log(e.messege));
-
-
-
-    })
-
-    btnLogOut.addEventListener('click', e => {
-
-        firebase.auth().signOut();
-
-    })
-
-    firebase.auth().onAuthStateChanged(firebaseUser => {
-
-        if (firebaseUser) {
-            console.log(firebaseUser);
-            btnLogOut.classList.remove('invisible');
-        } else {
-            console.log("not logged in");
-            btnLogOut.classList.add('invisible');
-        }
-
-    });
-
-
-
-    </script>
+   
 
 
 
