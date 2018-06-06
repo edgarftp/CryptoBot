@@ -30,14 +30,16 @@ $(document).ready(function(){
 
     btnLogin.addEventListener('click', e => {
 
-        //e.preventDefault();
+        e.preventDefault();
 
         const email = txtEmail.value;
         const pass = txtPassword.value;
         
 
         const promise = auth.signInWithEmailAndPassword(email, pass);
-
+        promise.then(function(something){
+            console.log("asdasd", something);
+        });
         promise.catch(e => console.log(e.messege));
 
     });
@@ -45,7 +47,7 @@ $(document).ready(function(){
 
     btnSignUp.addEventListener('click', e => {
 
-        //e.preventDefault();
+        e.preventDefault();
 
 
         const email = txtEmail.value;
@@ -58,6 +60,7 @@ $(document).ready(function(){
     });
 
      btnLogOut.addEventListener('click', e => {
+         e.preventDefault();
 
      firebase.auth().signOut();
 
@@ -69,8 +72,9 @@ $(document).ready(function(){
             console.log(firebaseUser);
             btnLogOut.classList.remove('invisible');
             window.location.href = "cryptobot.html";
+            conosle.log("log in mofo");
         } else {
-            console.log("not logged in");
+            console.log("not logged in:plololololoololo");
             btnLogOut.classList.add('invisible');
         }
 
