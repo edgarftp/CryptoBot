@@ -68,6 +68,7 @@ $(document).ready(function(){
         if (firebaseUser) {
             console.log(firebaseUser);
             btnLogOut.classList.remove('invisible');
+            window.location.href = "cryptobot.html";
         } else {
             console.log("not logged in");
             btnLogOut.classList.add('invisible');
