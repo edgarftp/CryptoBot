@@ -59,7 +59,7 @@
                         </li> -->
                     </ul>
         
-                    <a class="btn btn-success" href="login.html" role="button">Sign In</a>
+                    <a class="btn btn-success invisible" href="login.html" role="button">Sign In</a>
                     <button id="logout" class="btn btn-light ml-2">Logout</button>
         
         
@@ -144,7 +144,7 @@
             if (user) {
 
                 console.log(user);
-                document.getElementById('profile').innerHTML = JSON.stringify(user, null, 2);
+               // document.getElementById('profile').innerHTML = JSON.stringify(user, null, 2);
                 document.getElementById('logout').onclick = function () {
                     console.log("what");
                     if (confirm('Logout?')) {
