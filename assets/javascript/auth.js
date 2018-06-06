@@ -1,87 +1,55 @@
-$(document).ready(function(){
+        // firebase config
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyB_gHsrrFKG_qgTUzD6w7Ybuqbfw0ayH8I",
+            authDomain: "cryptobot-firebase.firebaseapp.com",
+            databaseURL: "https://cryptobot-firebase.firebaseio.com",
+            projectId: "cryptobot-firebase",
+            storageBucket: "cryptobot-firebase.appspot.com",
+            messagingSenderId: "447326953953"
+          };
+          firebase.initializeApp(config);
+
+        /////////////////////////////////////
 
 
+        /**********************\
+         * Check login status *
+        \**********************/
 
-  // Initialize Firebase
-
-  var config = {
-    apiKey: "AIzaSyDUE4pr67a80pw_BEgh8HlAY3GqI2MUHdU",
-    authDomain: "database-cryptobot.firebaseapp.com",
-    databaseURL: "https://database-cryptobot.firebaseio.com",
-    projectId: "database-cryptobot",
-    storageBucket: "database-cryptobot.appspot.com",
-    messagingSenderId: "540801591647"
-  };
-  firebase.initializeApp(config);
-  const auth = firebase.auth();
-
-
-    var bigOne = document.getElementById('bigOne');
-    var dbRef = firebase.database().ref().child('text');
-    dbRef.on('value', snap => bigOne.innerText = snap.val());
-
-
-
-    const txtEmail = document.getElementById('txtEmail');
-    const txtPassword = document.getElementById('txtPassword');
-    const btnLogin = document.getElementById('btnLogin');
-    const btnSignUp = document.getElementById('btnSignUp');
-    const btnLogOut = document.getElementById('btnLogOut');
-
-    btnLogin.addEventListener('click', e => {
-
-        e.preventDefault();
-
-        const email = txtEmail.value;
-        const pass = txtPassword.value;
-        
-
-        const promise = auth.signInWithEmailAndPassword(email, pass);
-        promise.then(function(something){
-            console.log("asdasd", something);
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) { // if already logged in
+                window.location.href = 'profile.html';
+            }
         });
-        promise.catch(e => console.log(e.messege));
 
-    });
-
-
-    btnSignUp.addEventListener('click', e => {
-
-        e.preventDefault();
+      
 
 
-        const email = txtEmail.value;
-        const pass = txtPassword.value;
+        /*******************\
+         * init Login UI *
+        \*******************/
 
-        const promise = auth.createUserWithEmailAndPassword(email, pass);
+        // FirebaseUI config.
+        var uiConfig = {
+            'signInSuccessUrl': false,
+            'signInOptions': [
+                // comment unused sign-in method
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                // firebase.auth.GithubAuthProvider.PROVIDER_ID,
+                firebase.auth.EmailAuthProvider.PROVIDER_ID
+            ],
+            // Terms of service url.
+            'tosUrl': false,
+        };
 
-        promise.catch(e => console.log(e.messege));
-
-    });
-
-     btnLogOut.addEventListener('click', e => {
-         e.preventDefault();
-
-     firebase.auth().signOut();
-
-     });
-
-    firebase.auth().onAuthStateChanged(firebaseUser => {
-
-        if (firebaseUser) {
-            console.log(firebaseUser);
-            btnLogOut.classList.remove('invisible');
-            window.location.href = "cryptobot.html";
-            conosle.log("log in mofo");
-        } else {
-            console.log("not logged in:plololololoololo");
-            btnLogOut.classList.add('invisible');
-        }
-
-    });
-
-});
+        // Initialize the FirebaseUI Widget using Firebase.
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        // The start method will wait until the DOM is loaded.
+        ui.start('#firebaseui-auth-container', uiConfig);
 
 
-
-
+        firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+        ////////////////////////////////////////
