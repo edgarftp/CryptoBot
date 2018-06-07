@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+    <style>
+        /* equal card height */
+
+        .row-equal>div[class*='col-'] {
+            display: flex;
+            flex: 1 0 auto;
+        }
+
+        .row-equal .card {
+            width: 100%;
+        }
+
+        /* ensure equal card height inside carousel */
+
+        .carousel-inner>.row-equal.active,
+        .carousel-inner>.row-equal.next,
+        .carousel-inner>.row-equal.prev {
+            display: flex;
+        }
+
+        /* prevent flicker during transition */
+
+        .carousel-inner>.row-equal.active.left,
+        .carousel-inner>.row-equal.active.right {
+            opacity: 0.5;
+            display: flex;
+        }
+
+
+        /* control image height */
+
+        .card-img-top-250 {
+            max-height: 250px;
+            overflow: hidden;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <section class="container p-t-3">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Bootstrap 4 Card Slider</h1>
+            </div>
+        </div>
+    </section>
+    <section class="carousel slide" data-ride="carousel" id="postsCarousel">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 text-md-right lead">
+                    <a class="btn btn-outline-secondary prev" href="" title="go back">
+                        <i class="fa fa-lg fa-chevron-left"></i>
+                    </a>
+                    <a class="btn btn-outline-secondary next" href="" title="more">
+                        <i class="fa fa-lg fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="contenedorDeTarjetas" class="container p-t-0 m-t-2 carousel-inner">
+
+        </div>
+    </section>
+
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            var contenedorDeTarjetas = $('#contenedorDeTarjetas');
+
+            var rowUno = $('<div>').addClass('row row-equal carousel-item active m-t-0');
+            var rowCounter = 0;
+            for (var i = 0; i < 20; i++) {
+
+                if (i % 3 == 0) {
+                    rowCounter++;
+                    var name = ("row" + rowCounter);
+                    var newRow = $('<div>').addClass('row row-equal carousel-item active m-t-0').attr("id", name);
+
+                }
+
+                // <div class="col-md-4">
+                //             <div class="card">
+                //                 <div class="card-img-top card-img-top-250">
+                //                     <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
+                //                 </div>
+                //                 <div class="card-block p-t-2">
+                //                     <h6 class="small text-wide p-b-2">Insight</h6>
+                //                     <h2>
+                //                         <a href>Why Stuff Happens Every Year.</a>
+                //                     </h2>
+                //                 </div>
+                //             </div>
+                //         </div>
+                var principalTarjeta = $('<div>').addClass('col-md-4');
+                var tarjeta = $('<div>').addClass('card');
+                var imagenTop = $('<div>').addClass('card-img-top card-img-top-250');
+                var imagenCen = $('<img>').attr('src', 'http://i.imgur.com/EW5FgJM.png');
+                var bloque = $('<div>').addClass('card-block p-t-2');
+                var fuenteTexto = $('<h6>').addClass('small text-wide p-b-2').text('Insight');
+                var texto = $('<h2>');
+                var link = $('<a>').attr('href', '');
+                link.text('Why Stuff Happens Every Year.');
+
+                bloque.append(fuenteTexto);
+                texto.append(link);
+                bloque.append(texto);
+                tarjeta.append(imagenCen);
+                tarjeta.append(imagenTop);
+                tarjeta.append(bloque);
+                principalTarjeta.append(tarjeta);
+                contenedorDeTarjetas.append(principalTarjeta);
+
+            }
+        });
+
+
+        (function ($) {
+            "use strict";
+
+            // manual carousel controls
+            $('.next').click(function () { $('.carousel').carousel('next'); return false; });
+            $('.prev').click(function () { $('.carousel').carousel('prev'); return false; });
+
+        })(jQuery);
+    </script>
+
+</body>
+
+</html>

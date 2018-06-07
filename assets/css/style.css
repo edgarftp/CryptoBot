@@ -1,0 +1,38 @@
+
+
+
+footer{
+    position:fixed;
+    left:0px;
+    bottom:0px;
+    height:70px;
+    width:100%;
+    background:#999;
+    overflow: hidden; 
+ }
+
+#ulfooter{ 
+    list-style: none;
+    position: relative;
+    float: left; 
+    display:block; 
+    left: 45%;
+    margin-top: 20px;
+ }
+ #lets{ 
+    position: relative;
+    float: left;
+    display: inline;
+    right: 50%; 
+}
+a:link {
+    text-decoration: none;
+    color: black;
+}
+a:hover {
+    font-weight: bold;
+}
+a:visited {
+    text-decoration: none;
+    color: dimgrey;
+}

@@ -7,8 +7,8 @@
             projectId: "cryptobot-f16e1",
             storageBucket: "cryptobot-f16e1.appspot.com",
             messagingSenderId: "962630257643"
-        };
-        firebase.initializeApp(config);
+          };
+          firebase.initializeApp(config);
 
         /////////////////////////////////////
 
@@ -19,7 +19,7 @@
 
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) { // if already logged in
-                window.location.href = 'create.html';
+                window.location.href = 'profile.html';
             }
         });
 
