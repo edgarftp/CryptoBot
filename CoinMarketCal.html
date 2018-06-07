@@ -13,6 +13,7 @@
         crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
+
     <style>
         /* equal card height */
 
@@ -49,6 +50,7 @@
             overflow: hidden;
         }
     </style>
+
 </head>
 
 <body>
@@ -73,28 +75,23 @@
             </div>
             <div id="carousel-inner" class="container p-t-0 m-t-2 carousel-inner">
 
-                <!-- <div class="container p-t-0 m-t-2 carousel-inner">
-                    <div class="row row-equal carousel-item active m-t-0">
-                        <div class="col-md-4">
-                            <div class="card">
-                                <div class="card-img-top card-img-top-250">
-                                    <img class="img-fluid" src="http://i.imgur.com/EW5FgJM.png" alt="Carousel 1">
-                                </div>
-                                <div class="card-block p-t-2">
-                                    <h6 class="small text-wide p-b-2">Insight</h6>
-                                    <h2>
-                                        <a href>Why Stuff Happens Every Year.</a>
-                                    </h2>
-                                </div>
-                            </div>
-                        </div> -->
-
             </div>
         </section>
     </div>
 
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="CoinMarketCal.js"></script>
+
+    <script>
+        (function ($) {
+            "use strict";
+
+            // manual carousel controls
+            $('.next').click(function () { $('.carousel').carousel('next'); return false; });
+            $('.prev').click(function () { $('.carousel').carousel('prev'); return false; });
+
+        })(jQuery);
+    </script>
 
 </body>
 
