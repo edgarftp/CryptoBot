@@ -38,7 +38,7 @@ $(document).ready(function () {
         if (index == 0) {
             if (refPrice == null) {
                 refPrice = btcPrice;
-                refDifference = parseFloat(btcPrice * -5);
+                refDifference = parseFloat(btcPrice * percentage);
                 arrayObj[index] = {
                     "price": btcPrice,
                     "dif": 0
@@ -110,14 +110,22 @@ $(document).ready(function () {
 
     var print_sell_data = function (date) {
         $("#pClosePrice").text("$" + parseFloat(sellPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
-        $("#win-loss-" + order).text(parseFloat(((sellPrice - buyPrice) / buyPrice) * 100).toFixed(2) + "%");
+        var winLoss = parseFloat(((sellPrice - buyPrice) / buyPrice) * 100);
+        if (winLoss > 0) {
+            $("#win-loss-" + order).text((winLoss).toFixed(2) + "%").removeClass("red").addClass("green");
+        } else if (winLoss < 0) {
+            $("#win-loss-" + order).text((winLoss).toFixed(2) + "%").removeClass("green").addClass("red");
+        } else {
+            $("#win-loss-" + order).text((winLoss).toFixed(2) + "%").removeClass("red green");
+        }
         $("#stopBtn" + order).attr("disabled", "disabled");
-        $("#stopBotBtn").addClass("hide");
-        $("#startBtn").removeClass("hide");
         clearInterval(bitsoInterval);
         buyBoolean = false;
         if (stopBotBool) {
             start_buy();
+        }else {
+            $("#stopBotBtn").addClass("hide");
+            $("#startBtn").removeClass("hide");
         }
 
     }
@@ -140,11 +148,11 @@ $(document).ready(function () {
                 do {
                     price = parseFloat(result.bids[i].price);
                     amount = parseFloat(result.bids[i].amount);
-                    cost = parseFloat(amount * 1.01);
+                    cost = parseFloat(amount * 1.005);
                     console.log(cost);
                     if (cost >= quantRedux) {
-                        sPriceSum += (price * (quantRedux / 1.01));
-                        sellPrice = (sPriceSum / (quantity / 1.01));
+                        sPriceSum += (price * (quantRedux / 1.005));
+                        sellPrice = (sPriceSum / (quantity / 1.005));
                         date = moment().format('MMMM Do YYYY, h:mm:ss a');
                         quantRedux = 0;
                     } else {
@@ -195,7 +203,7 @@ $(document).ready(function () {
                         sell_coin();
                     }
                     console.log(actualPrice);
-                    $("#actual-price-" + order).text(actualPrice);
+                    $("#actual-price-" + order).text("$" + parseFloat(actualPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
                     var winLoss = parseFloat(((actualPrice - price) / price) * 100);
                     if (winLoss > 0) {
                         $("#win-loss-" + order).text((winLoss).toFixed(2) + "%").removeClass("red").addClass("green");
@@ -218,6 +226,7 @@ $(document).ready(function () {
                 url: queryURL,
                 method: "GET"
             }).then(function (response) {
+                var internCash = cash;
                 var result = response.payload;
                 console.log(result);
                 quantity = 0;
@@ -232,13 +241,13 @@ $(document).ready(function () {
                     do {
                         price = parseFloat(result.asks[i].price);
                         amount = parseFloat(result.asks[i].amount);
-                        cost = parseFloat(price * amount * 1.01);
+                        cost = parseFloat(price * amount * 1.005);
                         console.log(cost);
-                        if (cost >= cash) {
-                            sumPrice += (cash / 1.01);
-                            quantity += (bQuant + (cash / (price * 1.01)));
+                        if (cost >= internCash) {
+                            sumPrice += (internCash / 1.005);
+                            quantity += (bQuant + (internCash / (price * 1.005)));
                             buyPrice = (sumPrice) / (quantity);
-                            cash = 0;
+                            internCash = 0;
                             date = moment().format('MMMM Do YYYY, h:mm:ss a');
                             console.log("Final " + sumPrice)
                             console.log(i + 1);
@@ -249,11 +258,11 @@ $(document).ready(function () {
                             bQuant += parseFloat(amount);
                             console.log("Q is " + bQuant);
                             console.log("sumPrice " + sumPrice);
-                            cash -= cost;
+                            internCash -= cost;
                             i++;
                         }
                     }
-                    while (cash > 0 || i > 40);
+                    while (internCash > 0 || i > 40);
 
                 }
                 buy_status(buyPrice, quantity, date);
@@ -261,7 +270,8 @@ $(document).ready(function () {
             })
         };
 
-        $(".closeButtons").on("click","#closeBtn" + order, function () {
+        $(document).on("click",".closeButtons", function () {
+
             sell_coin();
         });
 
@@ -273,6 +283,8 @@ $(document).ready(function () {
             } else {
                 console.log("buyBoolean False");
                 clearInterval(interval);
+                $("#stopBotBtn").addClass("hide");
+                $("#startBtn").removeClass("hide");
             }
         });
 
