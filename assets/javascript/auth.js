@@ -1,83 +1,55 @@
-$(document).ready(function(){
+        // firebase config
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAdj2Coo5eHzElm9E8tUXy4EmGjwcUW8Xc",
+            authDomain: "cryptobot-f16e1.firebaseapp.com",
+            databaseURL: "https://cryptobot-f16e1.firebaseio.com",
+            projectId: "cryptobot-f16e1",
+            storageBucket: "cryptobot-f16e1.appspot.com",
+            messagingSenderId: "962630257643"
+          };
+          firebase.initializeApp(config);
+
+        /////////////////////////////////////
 
 
+        /**********************\
+         * Check login status *
+        \**********************/
 
-  // Initialize Firebase
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) { // if already logged in
+                window.location.href = 'profile.html';
+            }
+        });
 
-  var config = {
-    apiKey: "AIzaSyDUE4pr67a80pw_BEgh8HlAY3GqI2MUHdU",
-    authDomain: "database-cryptobot.firebaseapp.com",
-    databaseURL: "https://database-cryptobot.firebaseio.com",
-    projectId: "database-cryptobot",
-    storageBucket: "database-cryptobot.appspot.com",
-    messagingSenderId: "540801591647"
-  };
-  firebase.initializeApp(config);
-  const auth = firebase.auth();
+      
 
 
-    var bigOne = document.getElementById('bigOne');
-    var dbRef = firebase.database().ref().child('text');
-    dbRef.on('value', snap => bigOne.innerText = snap.val());
+        /*******************\
+         * init Login UI *
+        \*******************/
+
+        // FirebaseUI config.
+        var uiConfig = {
+            'signInSuccessUrl': false,
+            'signInOptions': [
+                // comment unused sign-in method
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                // firebase.auth.GithubAuthProvider.PROVIDER_ID,
+                firebase.auth.EmailAuthProvider.PROVIDER_ID
+            ],
+            // Terms of service url.
+            'tosUrl': false,
+        };
+
+        // Initialize the FirebaseUI Widget using Firebase.
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        // The start method will wait until the DOM is loaded.
+        ui.start('#firebaseui-auth-container', uiConfig);
 
 
-
-    const txtEmail = document.getElementById('txtEmail');
-    const txtPassword = document.getElementById('txtPassword');
-    const btnLogin = document.getElementById('btnLogin');
-    const btnSignUp = document.getElementById('btnSignUp');
-    const btnLogOut = document.getElementById('btnLogOut');
-
-    btnLogin.addEventListener('click', e => {
-
-        //e.preventDefault();
-
-        const email = txtEmail.value;
-        const pass = txtPassword.value;
-        
-
-        const promise = auth.signInWithEmailAndPassword(email, pass);
-
-        promise.catch(e => console.log(e.messege));
-
-    });
-
-
-    btnSignUp.addEventListener('click', e => {
-
-        //e.preventDefault();
-
-
-        const email = txtEmail.value;
-        const pass = txtPassword.value;
-
-        const promise = auth.createUserWithEmailAndPassword(email, pass);
-
-        promise.catch(e => console.log(e.messege));
-
-    });
-
-     btnLogOut.addEventListener('click', e => {
-
-     firebase.auth().signOut();
-
-     });
-
-    firebase.auth().onAuthStateChanged(firebaseUser => {
-
-        if (firebaseUser) {
-            console.log(firebaseUser);
-            btnLogOut.classList.remove('invisible');
-            window.location.href = "cryptobot.html";
-        } else {
-            console.log("not logged in");
-            btnLogOut.classList.add('invisible');
-        }
-
-    });
-
-});
-
-
-
-
+        firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+        ////////////////////////////////////////
