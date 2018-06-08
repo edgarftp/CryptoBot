@@ -38,7 +38,7 @@ $(document).ready(function () {
         if (index == 0) {
             if (refPrice == null) {
                 refPrice = btcPrice;
-                refDifference = parseFloat(btcPrice * -5);
+                refDifference = parseFloat(btcPrice * percentage);
                 arrayObj[index] = {
                     "price": btcPrice,
                     "dif": 0
