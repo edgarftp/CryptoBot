@@ -226,6 +226,7 @@ $(document).ready(function () {
                 url: queryURL,
                 method: "GET"
             }).then(function (response) {
+                var internCash = cash;
                 var result = response.payload;
                 console.log(result);
                 quantity = 0;
@@ -242,11 +243,11 @@ $(document).ready(function () {
                         amount = parseFloat(result.asks[i].amount);
                         cost = parseFloat(price * amount * 1.01);
                         console.log(cost);
-                        if (cost >= cash) {
-                            sumPrice += (cash / 1.01);
-                            quantity += (bQuant + (cash / (price * 1.01)));
+                        if (cost >= internCash) {
+                            sumPrice += (internCash / 1.01);
+                            quantity += (bQuant + (internCash / (price * 1.01)));
                             buyPrice = (sumPrice) / (quantity);
-                            cash = 0;
+                            internCash = 0;
                             date = moment().format('MMMM Do YYYY, h:mm:ss a');
                             console.log("Final " + sumPrice)
                             console.log(i + 1);
@@ -257,11 +258,11 @@ $(document).ready(function () {
                             bQuant += parseFloat(amount);
                             console.log("Q is " + bQuant);
                             console.log("sumPrice " + sumPrice);
-                            cash -= cost;
+                            internCash -= cost;
                             i++;
                         }
                     }
-                    while (cash > 0 || i > 40);
+                    while (internCash > 0 || i > 40);
 
                 }
                 buy_status(buyPrice, quantity, date);
