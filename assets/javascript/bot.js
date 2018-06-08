@@ -162,17 +162,17 @@ $(document).ready(function () {
             buyBoolean = true;
             stopLossPrice = parseFloat(price);
             order++;
-            var divColumns = $("<div>").addClass("row col-md-12");
-            var pOrder = $("<p>").text("Buy order #" + order).addClass("col-md-1 dynamic");
-            var pDate = $("<p>").text(date).addClass("col-md-2 dynamic");
-            var pBuyPrice = $("<p>").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass("dynamic col-md-1");
-            var pQuantity = $("<p>").text(parseFloat(quantity + "BTC").toFixed(8)).addClass("dynamic col-md-1");
-            var pActualPrice = $("<p>").addClass("col-md-2 dynamic").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).attr("id", "actual-price-" + order);
-            var pWinLoss = $("<p>").text("N/A").addClass("col-md-1 dynamic").attr("id", "win-loss-" + order);
-            var pClosePrice = $("<p>").text("N/A").addClass("col-md-1 dynamic").attr("id", "pClosePrice");
+            var pOrder = $("<td>").text("Buy order #" + order).addClass("col-md-1 dynamic");
+            var pDate = $("<td>").text(date).addClass("col-md-2 dynamic");
+            var pBuyPrice = $("<td>").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass("dynamic col-md-1");
+            var pQuantity = $("<td>").text(parseFloat(quantity + "BTC").toFixed(8)).addClass("dynamic col-md-1");
+            var pActualPrice = $("<td>").addClass("col-md-2 dynamic").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).attr("id", "actual-price-" + order);
+            var pWinLoss = $("<td>").text("N/A").addClass("col-md-1 dynamic").attr("id", "win-loss-" + order);
+            var pClosePrice = $("<td>").text("N/A").addClass("col-md-1 dynamic").attr("id", "pClosePrice");
+            var btnTdHolder = $("<td>");
             var stopBtn = $("<button>").text("Stop").addClass("col-md-1 btn btn-danger btn-sm closeButtons").attr("id", "stopBtn" + order);
-            divColumns.append(pOrder, pDate, pBuyPrice, pQuantity, pActualPrice, pClosePrice, pWinLoss, stopBtn);
-            $("#divHolder").prepend(divColumns);
+            btnTdHolder.append(stopBtn);
+            $("rowHolder").append(pOrder, pDate, pBuyPrice, pQuantity, pActualPrice, pClosePrice, pWinLoss, stopBtn);
 
             bitsoInterval = setInterval(function () {
                 var queryURL = "https://api.bitso.com/v3/ticker/?book=btc_mxn"
