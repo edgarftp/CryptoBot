@@ -164,14 +164,12 @@ $(document).ready(function () {
             order++;
             var divColumns = $("<div>").addClass("row col-md-12");
             var pOrder = $("<p>").text("Buy order #" + order).addClass("col-md-1");
-            var pDate = $("<p>").text(date).addClass("col-md-1");
+            var pDate = $("<p>").text(date).addClass("col-md-2");
             var pBuyPrice = $("<p>").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass("col-md-1");
-            var pQuantity = $("<p>").text(parseFloat(quantity).toFixed(8)).addClass("col-md-1");
-            var pCoin = $("<p>").text("BTC").addClass("col-md-1");
-            var pEquivalent = $("<p>").text("$" + parseFloat(parseFloat(price) * parseFloat(quantity)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass("col-md-1");
+            var pQuantity = $("<p>").text(parseFloat(quantity + "BTC").toFixed(8)).addClass("col-md-1");
             var pActualPrice = $("<p>").addClass("col-md-1").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).attr("id", "actual-price-" + order);
             var pWinLoss = $("<p>").text("N/A").addClass("col-md-1").attr("id", "win-loss-" + order);
-            var pCloseDate = $("<p>").text("Not closed Yet").addClass("col-md-1").attr("id", "pCloseDate");
+            var pCloseDate = $("<p>").text("Not closed Yet").addClass("col-md-2").attr("id", "pCloseDate");
             var pClosePrice = $("<p>").text("N/A").addClass("col-md-1").attr("id", "pClosePrice");
             var stopBtn = $("<button>").text("Stop").addClass("col-md-1 btn btn-danger closeButtons").attr("id", "stopBtn" + order);
             divColumns.append(pOrder, pDate, pBuyPrice, pQuantity, pCoin, pEquivalent, pActualPrice, pCloseDate, pClosePrice, pWinLoss, stopBtn);
