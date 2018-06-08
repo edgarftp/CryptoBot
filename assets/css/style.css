@@ -36,3 +36,13 @@ a:visited {
     text-decoration: none;
     color: dimgrey;
 }
+.card-body {
+height: 170px !important;
+ }
+.card-text {
+font-size: small !important;
+ }
+ .card-footer {
+height: 50px !important;
+font-size: smaller !important;
+}
