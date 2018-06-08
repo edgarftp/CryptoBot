@@ -162,6 +162,7 @@ $(document).ready(function () {
             buyBoolean = true;
             stopLossPrice = parseFloat(price);
             order++;
+            var tableRow = $("<tr>");
             var pOrder = $("<td>").text("Buy order #" + order).addClass(" dynamic").attr("scope", "col");
             var pDate = $("<td>").text(date).addClass(" dynamic").attr("scope", "col");
             var pBuyPrice = $("<td>").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass("dynamic ").attr("scope", "col");
@@ -172,7 +173,8 @@ $(document).ready(function () {
             var btnTdHolder = $("<td>").attr("scope", "col");
             var stopBtn = $("<button>").text("Stop").addClass(" btn btn-danger btn-sm closeButtons").attr("id", "stopBtn" + order);
             btnTdHolder.append(stopBtn);
-            $("rowHolder").append(pOrder, pDate, pBuyPrice, pQuantity, pActualPrice, pClosePrice, pWinLoss, stopBtn);
+            tableRow.append(pOrder, pDate, pBuyPrice, pQuantity, pActualPrice, pClosePrice, pWinLoss, stopBtn);
+            $("#rowHolder").prepend(tableRow);
 
             bitsoInterval = setInterval(function () {
                 var queryURL = "https://api.bitso.com/v3/ticker/?book=btc_mxn"
