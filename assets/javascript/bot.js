@@ -112,6 +112,8 @@ $(document).ready(function () {
         $("#pClosePrice").text("$" + parseFloat(sellPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
         $("#win-loss-" + order).text(parseFloat(((sellPrice - buyPrice) / buyPrice) * 100).toFixed(2) + "%");
         $("#stopBtn" + order).attr("disabled", "disabled");
+        $("#stopBotBtn").addClass("hide");
+        $("#startBtn").removeClass("hide");
         clearInterval(bitsoInterval);
         buyBoolean = false;
         if (stopBotBool) {
