@@ -162,15 +162,15 @@ $(document).ready(function () {
             buyBoolean = true;
             stopLossPrice = parseFloat(price);
             order++;
-            var pOrder = $("<td>").text("Buy order #" + order).addClass("col-md-1 dynamic");
-            var pDate = $("<td>").text(date).addClass("col-md-2 dynamic");
-            var pBuyPrice = $("<td>").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass("dynamic col-md-1");
-            var pQuantity = $("<td>").text(parseFloat(quantity + "BTC").toFixed(8)).addClass("dynamic col-md-1");
-            var pActualPrice = $("<td>").addClass("col-md-2 dynamic").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).attr("id", "actual-price-" + order);
-            var pWinLoss = $("<td>").text("N/A").addClass("col-md-1 dynamic").attr("id", "win-loss-" + order);
-            var pClosePrice = $("<td>").text("N/A").addClass("col-md-1 dynamic").attr("id", "pClosePrice");
-            var btnTdHolder = $("<td>");
-            var stopBtn = $("<button>").text("Stop").addClass("col-md-1 btn btn-danger btn-sm closeButtons").attr("id", "stopBtn" + order);
+            var pOrder = $("<td>").text("Buy order #" + order).addClass(" dynamic").attr("scope", "col");
+            var pDate = $("<td>").text(date).addClass(" dynamic").attr("scope", "col");
+            var pBuyPrice = $("<td>").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass("dynamic ").attr("scope", "col");
+            var pQuantity = $("<td>").text(parseFloat(quantity + "BTC").toFixed(8)).addClass("dynamic ").attr("scope", "col");
+            var pActualPrice = $("<td>").addClass("dynamic").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).attr("id", "actual-price-" + order).attr("scope", "col");
+            var pWinLoss = $("<td>").text("N/A").addClass(" dynamic").attr("id", "win-loss-" + order).attr("scope", "col");
+            var pClosePrice = $("<td>").text("N/A").addClass(" dynamic").attr("id", "pClosePrice").attr("scope", "col");
+            var btnTdHolder = $("<td>").attr("scope", "col");
+            var stopBtn = $("<button>").text("Stop").addClass(" btn btn-danger btn-sm closeButtons").attr("id", "stopBtn" + order);
             btnTdHolder.append(stopBtn);
             $("rowHolder").append(pOrder, pDate, pBuyPrice, pQuantity, pActualPrice, pClosePrice, pWinLoss, stopBtn);
 
