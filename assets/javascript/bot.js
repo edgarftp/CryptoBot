@@ -203,7 +203,7 @@ $(document).ready(function () {
                         sell_coin();
                     }
                     console.log(actualPrice);
-                    $("#actual-price-" + order).text(actualPrice);
+                    $("#actual-price-" + order).text("$" + parseFloat(actualPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
                     var winLoss = parseFloat(((actualPrice - price) / price) * 100);
                     if (winLoss > 0) {
                         $("#win-loss-" + order).text((winLoss).toFixed(2) + "%").removeClass("red").addClass("green");
