@@ -1,12 +1,12 @@
         // firebase config
         // Initialize Firebase
         var config = {
-            apiKey: "AIzaSyAdj2Coo5eHzElm9E8tUXy4EmGjwcUW8Xc",
-            authDomain: "cryptobot-f16e1.firebaseapp.com",
-            databaseURL: "https://cryptobot-f16e1.firebaseio.com",
-            projectId: "cryptobot-f16e1",
-            storageBucket: "cryptobot-f16e1.appspot.com",
-            messagingSenderId: "962630257643"
+            apiKey: "AIzaSyB_gHsrrFKG_qgTUzD6w7Ybuqbfw0ayH8I",
+            authDomain: "cryptobot-firebase.firebaseapp.com",
+            databaseURL: "https://cryptobot-firebase.firebaseio.com",
+            projectId: "cryptobot-firebase",
+            storageBucket: "cryptobot-firebase.appspot.com",
+            messagingSenderId: "447326953953"
           };
           firebase.initializeApp(config);
 
@@ -37,7 +37,7 @@
                 // comment unused sign-in method
                 firebase.auth.GoogleAuthProvider.PROVIDER_ID,
                 firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
                 // firebase.auth.GithubAuthProvider.PROVIDER_ID,
                 firebase.auth.EmailAuthProvider.PROVIDER_ID
             ],

@@ -21,7 +21,7 @@ footer{
  }
  #lets{ 
     position: relative;
-    float: left;
+    /* float: left;  */
     display: inline;
     right: 50%; 
 }
@@ -48,3 +48,4 @@ a:visited {
 .red{
     color: red;
 }
+
