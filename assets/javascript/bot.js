@@ -148,11 +148,11 @@ $(document).ready(function () {
                 do {
                     price = parseFloat(result.bids[i].price);
                     amount = parseFloat(result.bids[i].amount);
-                    cost = parseFloat(amount * 1.01);
+                    cost = parseFloat(amount * 1.005);
                     console.log(cost);
                     if (cost >= quantRedux) {
-                        sPriceSum += (price * (quantRedux / 1.01));
-                        sellPrice = (sPriceSum / (quantity / 1.01));
+                        sPriceSum += (price * (quantRedux / 1.005));
+                        sellPrice = (sPriceSum / (quantity / 1.005));
                         date = moment().format('MMMM Do YYYY, h:mm:ss a');
                         quantRedux = 0;
                     } else {
@@ -241,11 +241,11 @@ $(document).ready(function () {
                     do {
                         price = parseFloat(result.asks[i].price);
                         amount = parseFloat(result.asks[i].amount);
-                        cost = parseFloat(price * amount * 1.01);
+                        cost = parseFloat(price * amount * 1.005);
                         console.log(cost);
                         if (cost >= internCash) {
-                            sumPrice += (internCash / 1.01);
-                            quantity += (bQuant + (internCash / (price * 1.01)));
+                            sumPrice += (internCash / 1.005);
+                            quantity += (bQuant + (internCash / (price * 1.005)));
                             buyPrice = (sumPrice) / (quantity);
                             internCash = 0;
                             date = moment().format('MMMM Do YYYY, h:mm:ss a');
@@ -283,6 +283,8 @@ $(document).ready(function () {
             } else {
                 console.log("buyBoolean False");
                 clearInterval(interval);
+                $("#stopBotBtn").addClass("hide");
+                $("#startBtn").removeClass("hide");
             }
         });
 
