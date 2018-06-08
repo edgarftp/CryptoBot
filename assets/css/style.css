@@ -39,3 +39,12 @@ a:visited {
 .hide{
     display: none !important;
 }
+.header-2 {
+    font-weight: bold;
+}
+.green{
+    color: green;
+}
+.red{
+    color: red;
+}
