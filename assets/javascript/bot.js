@@ -162,7 +162,7 @@ $(document).ready(function () {
             buyBoolean = true;
             stopLossPrice = parseFloat(price);
             order++;
-            var divColumns = $("<div>").addClass("col-md-12");
+            var divColumns = $("<div>").addClass("row col-md-12");
             var pOrder = $("<p>").text("Buy order #" + order).addClass("col-md-1");
             var pDate = $("<p>").text(date).addClass("col-md-1");
             var pBuyPrice = $("<p>").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass("col-md-1");
