@@ -140,10 +140,10 @@ $(document).ready(function () {
                     cost = parseFloat(amount * 1.01);
                     console.log(cost);
                     if (cost >= quantRedux) {
-                        quantRedux = 0;
                         sPriceSum += (price * (quantRedux / 1.01));
                         sellPrice = (sPriceSum / (quantity / 1.01));
                         date = moment().format('MMMM Do YYYY, h:mm:ss a');
+                        quantRedux = 0;
                     } else {
                         quantRedux -= cost;
                         sPriceSum += amount * price;
