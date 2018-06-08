@@ -86,7 +86,7 @@ $(document).ready(function () {
 
     $("#startBtn").on("click", function () {
         cash = parseFloat($("#cashValue").val().trim());
-        percentageValue =parseFloat($("#percentageValue").val().trim());
+        percentageValue = parseFloat($("#percentageValue").val().trim());
         $("#startBtn").addClass("hide");
         $("#stopBotBtn").removeClass("hide");
         start_buy();
@@ -94,7 +94,7 @@ $(document).ready(function () {
         console.log("your percentage value " + percentageValue + "%");
     });
 
-    var start_buy = function() {
+    var start_buy = function () {
         interval = setInterval(async function () {
 
             const binance = new ccxt.binance();
@@ -105,23 +105,23 @@ $(document).ready(function () {
             }
         }, 5000);
     }
-        
 
 
-    var print_sell_data = function(date) {
+
+    var print_sell_data = function (date) {
         $("#pCloseDate").text(date);
         $("#pClosePrice").text("$" + parseFloat(sellPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
         $("#win-loss-" + order).text(parseFloat(((sellPrice - buyPrice) / buyPrice) * 100).toFixed(2) + "%");
         $("#stopBtn" + order).attr("disabled", "disabled");
         clearInterval(bitsoInterval);
         buyBoolean = false;
-        if (stopBotBool){
+        if (stopBotBool) {
             start_buy();
         }
-        
+
     }
 
-    var sell_coin = function() {
+    var sell_coin = function () {
         var queryURL = "https://api.bitso.com/v3/order_book/?book=btc_mxn"
 
         $.ajax({
@@ -141,128 +141,136 @@ $(document).ready(function () {
                     cost = parseFloat(amount * 1.01);
                     console.log(cost);
                     if (cost >= quantRedux) {
-                      quantRedux = 0;
-                      sPriceSum += (price * (quantRedux/1.01));
-                      sellPrice = (sPriceSum / (quantity/1.01));
-                      date = moment().format('MMMM Do YYYY, h:mm:ss a');
+                        quantRedux = 0;
+                        sPriceSum += (price * (quantRedux / 1.01));
+                        sellPrice = (sPriceSum / (quantity / 1.01));
+                        date = moment().format('MMMM Do YYYY, h:mm:ss a');
                     } else {
                         quantRedux -= cost;
                         sPriceSum += amount * price;
                         i++;
-                        
+
                     }
                 }
                 while (quantRedux > 0 || i > 40);
                 print_sell_data(date);
-    }
-
-    var buy_status = function (price, quantity, date) {
-        buyBoolean = true;
-        stopLossPrice = parseFloat(price);
-        order++;
-        var divRow = $("<div>").addClass("row").attr("id", "divRow" + order);
-        var divColumns = $("<div>").addClass("col-md-12");
-        var pOrder = $("<p>").text("Buy order #" + order).addClass("col-md-1");
-        var pDate = $("<p>").text(date).addClass("col-md-2");
-        var pBuyPrice = $("<p>").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass("col-md-1");
-        var pQuantity = $("<p>").text(parseFloat(quantity).toFixed(8)).addClass("col-md-1");
-        var pCoin = $("<p>").text("BTC").addClass("col-md-1");
-        var pEquivalent = $("<p>").text("$" + parseFloat(parseFloat(price) * parseFloat(quantity)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass("col-md-1");
-        var pActualPrice = $("<p>").addClass("col-md-1").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).attr("id", "actual-price-" + order);
-        var pWinLoss = $("<p>").text("N/A").addClass("col-md-1").attr("id", "win-loss-" + order);
-        var pCloseDate = $("<p>").text("Not closed Yet").addClass("col-md-1").attr("id", "pCloseDate");
-        var pClosePrice = $("<p>").text("N/A").addClass("col-md-1").attr("id", "pClosePrice");
-        var stopBtn = $("<button>").text("Stop").addClass("col-md-1 btn btn-danger").attr("id", "stopBtn" + order);
-        divColumns.append(pOrder, pDate, pBuyPrice, pQuantity, pCoin, pEquivalent, pActualPrice, pCloseDate, pClosePrice,pWinLoss,stopBtn);
-        divRow.append(divColumns);
-        $("#divHolder").prepend(divRow);
-
-        bitsoInterval = setInterval(function () {
-            var queryURL = "https://api.bitso.com/v3/ticker/?book=btc_mxn"
-
-            $.ajax({
-                url: queryURL,
-                method: "GET"
-            }).then(function (response) {
-                actualPrice = parseFloat(response.payload.last);
-                if (actualPrice>stopLossPrice){
-                    stopLossPrice = actualPrice;
-                }
-                var lowestPrice = parseFloat(stopLossPrice * (1-(percentageValue/100)));
-
-                if (lowestPrice>actualPrice){
-                    sell_coin();
-                }
-                console.log(actualPrice);
-                $("#actual-price-" + order).text(actualPrice);
-                $("#win-loss-" + order).text(parseFloat(((actualPrice - price) / price) * 100).toFixed(2) + "%");
-            });
-        }, 5000)
-    };
-
-
-
-    var buy_function = function () {
-        var queryURL = "https://api.bitso.com/v3/order_book/?book=btc_mxn"
-
-        $.ajax({
-            url: queryURL,
-            method: "GET"
-        }).then(function (response) {
-            var result = response.payload;
-            console.log(result);
-            quantity = 0;
-            var sumPrice = 0;
-            buyPrice = 0;
-            var cost = 0;
-            var bQuant = 0;
-            var i = 0;
-            var date = null;
-            if (result.asks.length > 0) {
-                do {
-                    price = parseFloat(result.asks[i].price);
-                    amount = parseFloat(result.asks[i].amount);
-                    cost = parseFloat(price * amount * 1.01);
-                    console.log(cost);
-                    if (cost >= cash) {
-                        sumPrice += (cash / 1.01);
-                        quantity += (bQuant + (cash / (price * 1.01)));
-                        buyPrice = (sumPrice) / (quantity);
-                        cash = 0;
-                        date = moment().format('MMMM Do YYYY, h:mm:ss a');
-                        console.log("Final " + sumPrice)
-                        console.log(i + 1);
-                        console.log("Compraste: " + quantity + " BTC");
-                        console.log("A precio de: " + buyPrice + " BTC");
-                    } else {
-                        sumPrice += (price * amount);
-                        bQuant += parseFloat(amount);
-                        console.log("Q is " + bQuant);
-                        console.log("sumPrice " + sumPrice);
-                        cash -= cost;
-                        i++;
-                    }
-                }
-                while (cash > 0 || i > 40);
-
             }
-            buy_status(buyPrice, quantity, date);
+
+            var buy_status = function (price, quantity, date) {
+                buyBoolean = true;
+                stopLossPrice = parseFloat(price);
+                order++;
+                var divRow = $("<div>").addClass("row").attr("id", "divRow" + order);
+                var divColumns = $("<div>").addClass("col-md-12");
+                var pOrder = $("<p>").text("Buy order #" + order).addClass("col-md-1");
+                var pDate = $("<p>").text(date).addClass("col-md-2");
+                var pBuyPrice = $("<p>").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass("col-md-1");
+                var pQuantity = $("<p>").text(parseFloat(quantity).toFixed(8)).addClass("col-md-1");
+                var pCoin = $("<p>").text("BTC").addClass("col-md-1");
+                var pEquivalent = $("<p>").text("$" + parseFloat(parseFloat(price) * parseFloat(quantity)).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass("col-md-1");
+                var pActualPrice = $("<p>").addClass("col-md-1").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).attr("id", "actual-price-" + order);
+                var pWinLoss = $("<p>").text("N/A").addClass("col-md-1").attr("id", "win-loss-" + order);
+                var pCloseDate = $("<p>").text("Not closed Yet").addClass("col-md-1").attr("id", "pCloseDate");
+                var pClosePrice = $("<p>").text("N/A").addClass("col-md-1").attr("id", "pClosePrice");
+                var stopBtn = $("<button>").text("Stop").addClass("col-md-1 btn btn-danger").attr("id", "stopBtn" + order);
+                divColumns.append(pOrder, pDate, pBuyPrice, pQuantity, pCoin, pEquivalent, pActualPrice, pCloseDate, pClosePrice, pWinLoss, stopBtn);
+                divRow.append(divColumns);
+                $("#divHolder").prepend(divRow);
+
+                bitsoInterval = setInterval(function () {
+                    var queryURL = "https://api.bitso.com/v3/ticker/?book=btc_mxn"
+
+                    $.ajax({
+                        url: queryURL,
+                        method: "GET"
+                    }).then(function (response) {
+                        actualPrice = parseFloat(response.payload.last);
+                        if (actualPrice > stopLossPrice) {
+                            stopLossPrice = actualPrice;
+                        }
+                        var lowestPrice = parseFloat(stopLossPrice * (1 - (percentageValue / 100)));
+
+                        if (lowestPrice > actualPrice) {
+                            sell_coin();
+                        }
+                        console.log(actualPrice);
+                        $("#actual-price-" + order).text(actualPrice);
+                        var winLoss = parseFloat(((actualPrice - price) / price) * 100);
+                        if (winLoss>0){
+                            $("#win-loss-" + order).text((winLoss).toFixed(2) + "%").removeClass("red").addClass("green");
+                        }else if (winLoss<0){
+                            $("#win-loss-" + order).text((winLoss).toFixed(2) + "%").removeClass("green").addClass("red");
+                        }else {
+                            $("#win-loss-" + order).text((winLoss).toFixed(2) + "%").removeClass("red green");
+                        }
+                        
+                    });
+                }, 5000)
+            };
+
+
+
+            var buy_function = function () {
+                var queryURL = "https://api.bitso.com/v3/order_book/?book=btc_mxn"
+
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                }).then(function (response) {
+                    var result = response.payload;
+                    console.log(result);
+                    quantity = 0;
+                    var sumPrice = 0;
+                    buyPrice = 0;
+                    var cost = 0;
+                    var bQuant = 0;
+                    var i = 0;
+                    var date = null;
+                    if (result.asks.length > 0) {
+                        do {
+                            price = parseFloat(result.asks[i].price);
+                            amount = parseFloat(result.asks[i].amount);
+                            cost = parseFloat(price * amount * 1.01);
+                            console.log(cost);
+                            if (cost >= cash) {
+                                sumPrice += (cash / 1.01);
+                                quantity += (bQuant + (cash / (price * 1.01)));
+                                buyPrice = (sumPrice) / (quantity);
+                                cash = 0;
+                                date = moment().format('MMMM Do YYYY, h:mm:ss a');
+                                console.log("Final " + sumPrice)
+                                console.log(i + 1);
+                                console.log("Compraste: " + quantity + " BTC");
+                                console.log("A precio de: " + buyPrice + " BTC");
+                            } else {
+                                sumPrice += (price * amount);
+                                bQuant += parseFloat(amount);
+                                console.log("Q is " + bQuant);
+                                console.log("sumPrice " + sumPrice);
+                                cash -= cost;
+                                i++;
+                            }
+                        }
+                        while (cash > 0 || i > 40);
+
+                    }
+                    buy_status(buyPrice, quantity, date);
+
+                })
+            };
+
+            $("#stopBtn" + order).on("click", function () {
+                sell_coin();
+            });
+
+            $("#stopBotBtn").on("click", function () {
+                if (buyBoolean) {
+                    stopBotBool = false;
+                    sell_coin();
+                } else {
+                    clearInterval(interval);
+                }
+            });
+
 
         })
-    };
-
-    $("#stopBtn" + order).on("click", function (){
-        sell_coin();
-    });
-
-    $("#stopBotBtn").on("click", function(){
-        if (buyBoolean) {
-            stopBotBool = false;
-            sell_coin();
-        }else {
-            clearInterval(interval);
-        }
-    });
-
-
-})
