@@ -171,7 +171,7 @@ $(document).ready(function () {
             var pWinLoss = $("<p>").text("N/A").addClass("col-md-1 dynamic").attr("id", "win-loss-" + order);
             var pClosePrice = $("<p>").text("N/A").addClass("col-md-1 dynamic").attr("id", "pClosePrice");
             var stopBtn = $("<button>").text("Stop").addClass("col-md-1 btn btn-danger btn-sm closeButtons").attr("id", "stopBtn" + order);
-            divColumns.append(pOrder, pDate, pBuyPrice, pQuantity, pCoin, pEquivalent, pActualPrice, pCloseDate, pClosePrice, pWinLoss, stopBtn);
+            divColumns.append(pOrder, pDate, pBuyPrice, pQuantity, pActualPrice, pClosePrice, pWinLoss, stopBtn);
             $("#divHolder").prepend(divColumns);
 
             bitsoInterval = setInterval(function () {
