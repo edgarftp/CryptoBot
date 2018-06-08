@@ -39,7 +39,7 @@ a:visited {
 .hide{
     display: none !important;
 }
-.header-2 {
+th {
     font-weight: bold;
     text-align: center;
 }

@@ -109,7 +109,6 @@ $(document).ready(function () {
 
 
     var print_sell_data = function (date) {
-        $("#pCloseDate").text(date);
         $("#pClosePrice").text("$" + parseFloat(sellPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
         $("#win-loss-" + order).text(parseFloat(((sellPrice - buyPrice) / buyPrice) * 100).toFixed(2) + "%");
         $("#stopBtn" + order).attr("disabled", "disabled");
