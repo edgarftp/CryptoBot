@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
+
+    <!-- firebase linking script -->
+
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+
+    <title>Cryptobot</title>
+
+    <style>
+        .card-body {
+            height: 170px !important;
+        }
+
+        .card-text {
+            font-size: small !important;
+        }
+
+        .card-footer {
+            height: 50px !important;
+            font-size: smaller !important;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-dark mb-4" style="padding-top: 0%; padding-bottom: 0%; margin-top: 0%; margin-bottom: 0%;">
+        <a class="navbar-brand" href="#">
+            <img src="assets/images/logof.png" width="60px" style="padding-top: 0%; padding-bottom: 0%;" alt="">
+            <img src="assets/images/logowofb.png" width="120px;" style="padding-top: 0%; padding-bottom: 0%; margin-top: 0%; margin-bottom: 0%;"
+                alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#" style="display: none;">History
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <div class="row">
+        <div class="col-12">
+
+            <!-- CoinMarketCal API -->
+            <div class="container">
+                <div class="card-deck">
+                    <div class="card">
+                        <img class="card-img-top" height="200px" id="card1" src="" alt="Card image cap">
+                        <div class="card-body">
+                            <a href="" id="source1" target="_blank">
+                                <h5 class="card-title" id="card-title1">Card title</h5>
+                                <p class="card-text" id="card-text1"></p>
+                            </a>
+                        </div>
+                        <div class="card-footer" id="date-event1">
+                            <small class="text-muted"></small>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top" height="200px" id="card2" src="" alt="Card image cap">
+                        <div class="card-body">
+                            <a href="" id="source2" target="_blank">
+                                <h5 class="card-title" id="card-title2">Card title</h5>
+                                <p class="card-text" id="card-text2"></p>
+                            </a>
+                        </div>
+                        <div class="card-footer" id="date-event2">
+                            <small class="text-muted"></small>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top" height="200px" id="card3" src="" alt="Card image cap">
+                        <div class="card-body">
+                            <a href="" id="source3" target="_blank">
+                                <h5 class="card-title" id="card-title3">Card title</h5>
+                                <p class="card-text" id="card-text3"></p>
+                            </a>
+                        </div>
+                        <div class="card-footer" id="date-event3">
+                            <small class="text-muted"></small>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top" height="200px" id="card4" src="" alt="Card image cap">
+                        <div class="card-body">
+                            <a href="" id="source4" target="_blank">
+                                <h5 class="card-title" id="card-title4">Card title</h5>
+                                <p class="card-text" id="card-text4"></p>
+                            </a>
+                        </div>
+                        <div class="card-footer" id="date-event4">
+                            <small class="text-muted"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <footer style="background-color: darkgrey;  ">
+
+        <ul>
+            <li>
+                <a href="#">Contact us &nbsp;&nbsp;</a>
+            </li>
+            <li>
+                <a href="#">Support &nbsp;&nbsp;</a>
+            </li>
+            <li>
+                <a href="#">Our Team</a>
+            </li>
+        </ul>
+
+    </footer>
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+
+    <script src="assets/javascript/auth.js"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="CoinMarketCal.js"></script>
+
+
+
+
+</body>
+
+</html>
