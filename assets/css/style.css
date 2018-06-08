@@ -36,3 +36,6 @@ a:visited {
     text-decoration: none;
     color: dimgrey;
 }
+.hide{
+    display: none !important;
+}
