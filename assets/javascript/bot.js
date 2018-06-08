@@ -110,7 +110,14 @@ $(document).ready(function () {
 
     var print_sell_data = function (date) {
         $("#pClosePrice").text("$" + parseFloat(sellPrice).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,'));
-        $("#win-loss-" + order).text(parseFloat(((sellPrice - buyPrice) / buyPrice) * 100).toFixed(2) + "%");
+        var winLoss = parseFloat(((sellPrice - buyPrice) / buyPrice) * 100);
+        if (winLoss > 0) {
+            $("#win-loss-" + order).text((winLoss).toFixed(2) + "%").removeClass("red").addClass("green");
+        } else if (winLoss < 0) {
+            $("#win-loss-" + order).text((winLoss).toFixed(2) + "%").removeClass("green").addClass("red");
+        } else {
+            $("#win-loss-" + order).text((winLoss).toFixed(2) + "%").removeClass("red green");
+        }
         $("#stopBtn" + order).attr("disabled", "disabled");
         $("#stopBotBtn").addClass("hide");
         $("#startBtn").removeClass("hide");
@@ -261,7 +268,7 @@ $(document).ready(function () {
             })
         };
 
-        $(".closeButtons").on("click","#closeBtn" + order, function () {
+        $(document).on("click",".closeButtons", function () {
             sell_coin();
         });
 
