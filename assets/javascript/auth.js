@@ -1,61 +1,55 @@
+        // firebase config
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyAdj2Coo5eHzElm9E8tUXy4EmGjwcUW8Xc",
+            authDomain: "cryptobot-f16e1.firebaseapp.com",
+            databaseURL: "https://cryptobot-f16e1.firebaseio.com",
+            projectId: "cryptobot-f16e1",
+            storageBucket: "cryptobot-f16e1.appspot.com",
+            messagingSenderId: "962630257643"
+          };
+          firebase.initializeApp(config);
+
+        /////////////////////////////////////
 
 
-  // Initialize Firebase
+        /**********************\
+         * Check login status *
+        \**********************/
+
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) { // if already logged in
+                window.location.href = 'profile.html';
+            }
+        });
+
+      
 
 
-    const txtEmail = document.getElementById('txtEmail');
-    const txtPassword = document.getElementById('txtPassword');
-    const btnLogin = document.getElementById('btnLogin');
-    const btnSignUp = document.getElementById('btnSignUp');
-    const btnLogOut = document.getElementById('btnLogOut');
+        /*******************\
+         * init Login UI *
+        \*******************/
 
-    btnLogin.addEventListener('click', e => {
+        // FirebaseUI config.
+        var uiConfig = {
+            'signInSuccessUrl': false,
+            'signInOptions': [
+                // comment unused sign-in method
+                firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                // firebase.auth.GithubAuthProvider.PROVIDER_ID,
+                firebase.auth.EmailAuthProvider.PROVIDER_ID
+            ],
+            // Terms of service url.
+            'tosUrl': false,
+        };
 
-        const email = txtEmail.value;
-        const pass = txtPassword.value;
-        const auth = firebase.auth();
-
-        const promise = auth.signInWithEmailAndPassword(email, pass);
-
-        promise.catch(e => console.log(e.messege));
-
-    });
-
-
-    btnSignUp.addEventListener('click', e =>{
-
-
-        const email = txtEmail.value;
-        const pass = txtPassword.value;
-        const auth = firebase.auth();
-
-        const promise = auth.createUserWithEmailAndPassword(email, pass);
-
-        promise.catch(e => console.log(e.messege));
+        // Initialize the FirebaseUI Widget using Firebase.
+        var ui = new firebaseui.auth.AuthUI(firebase.auth());
+        // The start method will wait until the DOM is loaded.
+        ui.start('#firebaseui-auth-container', uiConfig);
 
 
-
-    })
-
-     btnLogOut.addEventListener('click', e => {
-
-     firebase.auth().signOut();
-
-     })
-
-    firebase.auth().onAuthStateChanged(firebaseUser => {
-
-        if (firebaseUser) {
-            console.log(firebaseUser);
-            btnLogOut.classList.remove('invisible');
-        } else {
-            console.log("not logged in");
-            btnLogOut.classList.add('invisible');
-        }
-
-    });
-
-
-
-
-
+        firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+        ////////////////////////////////////////
