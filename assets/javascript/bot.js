@@ -163,14 +163,14 @@ $(document).ready(function () {
             stopLossPrice = parseFloat(price);
             order++;
             var divColumns = $("<div>").addClass("row col-md-12");
-            var pOrder = $("<p>").text("Buy order #" + order).addClass("col-md-1");
-            var pDate = $("<p>").text(date).addClass("col-md-2");
-            var pBuyPrice = $("<p>").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass("col-md-1");
-            var pQuantity = $("<p>").text(parseFloat(quantity + "BTC").toFixed(8)).addClass("col-md-1");
-            var pActualPrice = $("<p>").addClass("col-md-2").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).attr("id", "actual-price-" + order);
-            var pWinLoss = $("<p>").text("N/A").addClass("col-md-1").attr("id", "win-loss-" + order);
-            var pClosePrice = $("<p>").text("N/A").addClass("col-md-1").attr("id", "pClosePrice");
-            var stopBtn = $("<button>").text("Stop").addClass("col-md-1 btn btn-danger closeButtons").attr("id", "stopBtn" + order);
+            var pOrder = $("<p>").text("Buy order #" + order).addClass("col-md-1 dynamic");
+            var pDate = $("<p>").text(date).addClass("col-md-2 dynamic");
+            var pBuyPrice = $("<p>").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).addClass("dynamic col-md-1");
+            var pQuantity = $("<p>").text(parseFloat(quantity + "BTC").toFixed(8)).addClass("dynamic col-md-1");
+            var pActualPrice = $("<p>").addClass("col-md-2 dynamic").text("$" + parseFloat(price).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')).attr("id", "actual-price-" + order);
+            var pWinLoss = $("<p>").text("N/A").addClass("col-md-1 dynamic").attr("id", "win-loss-" + order);
+            var pClosePrice = $("<p>").text("N/A").addClass("col-md-1 dynamic").attr("id", "pClosePrice");
+            var stopBtn = $("<button>").text("Stop").addClass("col-md-1 btn btn-danger btn-sm closeButtons").attr("id", "stopBtn" + order);
             divColumns.append(pOrder, pDate, pBuyPrice, pQuantity, pCoin, pEquivalent, pActualPrice, pCloseDate, pClosePrice, pWinLoss, stopBtn);
             $("#divHolder").prepend(divColumns);
 
