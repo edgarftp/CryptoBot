@@ -133,6 +133,7 @@ $(document).ready(function () {
             var sPriceSum = 0;
             var i = 0;
             var date = null;
+            var amount = 0;
             if (result.bids.length > 0) {
                 do {
                     price = parseFloat(result.bids[i].price);
@@ -224,6 +225,7 @@ $(document).ready(function () {
                 var bQuant = 0;
                 var i = 0;
                 var date = null;
+                var amount = 0;
                 if (result.asks.length > 0) {
                     do {
                         price = parseFloat(result.asks[i].price);
