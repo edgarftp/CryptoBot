@@ -238,12 +238,16 @@
         /////////////////////////////////////
 
         var Blog = firebase.database().ref('Entry').orderByChild('updatedAt');
-
+        
         Blog.on('value', function (r) {
+
+            console.log(r);
+            console.log(r.val());
+            var items = r.val();
 
             $('#entries').html('Loading...');
             var html = '';
-            r.forEach(function (item) {
+            items.forEach(function (item) {
                 entry = item.val()
                 html = '<div class="col-md-4">' +
                     '<a href="entry.html?id=' + item.getKey() + '" style="text-decoration:none!important;">' +
