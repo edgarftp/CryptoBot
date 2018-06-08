@@ -119,12 +119,13 @@ $(document).ready(function () {
             $("#win-loss-" + order).text((winLoss).toFixed(2) + "%").removeClass("red green");
         }
         $("#stopBtn" + order).attr("disabled", "disabled");
-        $("#stopBotBtn").addClass("hide");
-        $("#startBtn").removeClass("hide");
         clearInterval(bitsoInterval);
         buyBoolean = false;
         if (stopBotBool) {
             start_buy();
+        }else {
+            $("#stopBotBtn").addClass("hide");
+            $("#startBtn").removeClass("hide");
         }
 
     }
@@ -269,6 +270,7 @@ $(document).ready(function () {
         };
 
         $(document).on("click",".closeButtons", function () {
+
             sell_coin();
         });
 
