@@ -129,7 +129,7 @@ $(document).ready(function () {
         }).then(function (response) {
             var result = response.payload;
             var cost = 0;
-            var quantRedux = 0;
+            var quantRedux = quantity;
             var sPriceSum = 0;
             var i = 0;
             var date = null;
@@ -263,9 +263,11 @@ $(document).ready(function () {
 
         $("#stopBotBtn").on("click", function () {
             if (buyBoolean) {
+                console.log("buyBoolean true");
                 stopBotBool = false;
                 sell_coin();
             } else {
+                console.log("buyBoolean False");
                 clearInterval(interval);
             }
         });
