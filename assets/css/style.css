@@ -1,4 +1,6 @@
-
+body {
+    padding-bottom: 80px;
+}
 
 
 footer{
@@ -21,7 +23,7 @@ footer{
  }
  #lets{ 
     position: relative;
-    float: left;
+    /* float: left;  */
     display: inline;
     right: 50%; 
 }
@@ -35,4 +37,38 @@ a:hover {
 a:visited {
     text-decoration: none;
     color: dimgrey;
+}
+.hide{
+    display: none !important;
+}
+th {
+    font-weight: bold;
+    text-align: center;
+}
+.green{
+    color: green;
+}
+.red{
+    color: red;
+}
+.dynamic {
+    font-size: 14px;
+    text-align: center;
+}
+
+.card-body {
+    height: 170px !important;
+}
+
+.card-text {
+    font-size: small !important;
+}
+
+.card-footer {
+    height: 50px !important;
+    font-size: smaller !important;
+}
+.closeButtons {
+    display: block;
+    margin: auto;
 }
