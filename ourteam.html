@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Our team</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
+    crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css">
+     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.0.0/firebaseui.css" />
+
+</head>
+
+<body>
+
+
+
+                    <!-- navigation bar and singout button -->
+                    <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+                            <a class="navbar-brand" style="width: 600px;" href="index.html">
+                                <img src="assets/images/logof.png" width="10%">
+                                
+                                <img src="assets/images/logowofb.png" alt="" width="13%">
+                            </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                    
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav mr-auto">
+                                    <li class="nav-item active">
+                                    
+                                    </li>
+                                
+                                    <li class="nav-item">
+                                        <a class="nav-link invisible" href="create.html">Link</a>
+                                    </li>
+
+                                </ul>
+                    
+                                <a class="btn btn-success invisible" href="login.html" role="button">Sign In</a>
+                                <button id="logout" class="btn btn-light ml-2">Logout</button>
+                    
+                    
+                            </div>
+                        </nav>
+                </div>
+
+
+               
+                        <!-- Left column part 2 -->
+
+
+                        <div class="col-12">
+                                <div class="container px-4 py-4 mt-4" style="border: darkgrey; border-style: solid; border-width: 2px; border-radius: 15px; width: 80%;">
+                                    <div class="container">
+                                        <div class="form-group">
+                                            <form class="px-4 py-3">
+
+                                                <!-- Paragraph and info "about us"  -->
+
+                                    <p>
+                                            <h1>Lambo Team</h1>
+                                           <h5>Team Members</h5> 
+                                        <ul>
+
+                                        <li>Javier Alvarez</li>  
+                                        <li>Elias Juarez</li>
+                                        <li>Antonio Garza</li>
+                                        <li>Edgar Salinas</li>
+
+
+                                        </ul>
+                                        <p>
+                                                
+                                                ----------------------------------------------------------------------------------------------------------------------
+                                                <br>
+                                                The user gets to the main page. A stop loss/limit is set up with some default information that he can change.
+                                                
+                                                The user also inputs the amount of fake money in $MXN that the bot will work with.
+                                                
+                                                With a click on the start button the bot will begin to work.
+
+                                                <br>
+                                                ----------------------------------------------------------------------------------------------------------------------
+                                                <br>
+                                                <h3>Functions of the work:</h3>
+
+                                                <ul>
+                                                
+                                                <li> While in continuous contact with Binance API. On an abrupt rise in price in one of the coins listed on Bitso, that movement in price will trigger an event.</li>
+                                                
+                                                <li> The event created by the strong move in Binance will make the bot fetch the information of current sell price and sell quantity to simulate a buy of the currency.</li>
+                                                
+                                                <li> The information of the simulated buy will be displayed on the main web page. The web will display "# of trade", date, time, price that the user payed, quantity of the currency, equivalent to price, current price offered if you want to sell, % of win/lose of the transaction and a button to end the transaction. </li>
+                                                
+                                                <li> Once the simulated buy is done, the stop loss/limit will be working and fetching information in bitso to know if the price reaches the stop limit. Also displaying the current price to the user and modifying the % win/loss.</li>
+                                                
+                                                <li> At the end of the table a summary of the transaction is displayed for the user to know how much money has been made/lost in what amount of time, etc.</li>
+                                                
+                                                <li> At the bottom of the web page a crypto calendar is displayed so the user can look for important information in the crypto world.</li>
+                                                
+                                            </ul>
+                                            <br>
+                                                ----------------------------------------------------------------------------------------------------------------------
+                                            <br>
+        
+                                        </p>
+
+                                    </p>
+
+
+                                    <p>Email:cryptobottec@Gmail.com</p>
+                                    </div>
+                    
+                                </div>
+                            </div>
+                    
+                        </div>        
+
+
+
+                <!-- Footer contact, Support, our team -->
+
+                <footer style="background-color: darkgrey;  ">
+
+         
+                        <ul id="ulfooter">
+
+                                <li id="lets">
+                                        <a href="index.html">Home &nbsp;&nbsp;</a>
+                                    </li>
+
+                                <li id="lets">
+                                    <a href="contact_us.html">Contact us &nbsp;&nbsp;</a>
+                                </li>
+                                <li id="lets">
+                                    <a href="#">Support &nbsp;&nbsp;</a>
+                                </li>
+                               
+                        
+                    
+                        </footer>
+    
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+        <!-- <script src="https://www.gstatic.com/firebasejs/3.3.0/firebase.js"></script> -->
+        <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+            crossorigin="anonymous"></script>
+</body>
+</html>
